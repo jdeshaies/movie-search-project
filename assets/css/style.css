@@ -1,0 +1,9 @@
+.nav-wrapper {
+    padding-block-end: 20px; 
+writing-mode: horizontal-tb;
+    position: relative;
+margin-top: 10px;
+background-color: rgb(237, 233, 241);
+color: cadetblue;
+
+}
