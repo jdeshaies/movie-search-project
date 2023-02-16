@@ -1,9 +1,35 @@
-.nav-wrapper {
-    padding-block-end: 20px; 
-writing-mode: horizontal-tb;
-    position: relative;
-margin-top: 10px;
-background-color: rgb(237, 233, 241);
-color: cadetblue;
+span.material-symbols-outlined {
+    font-size: 12rem;
+    text-align: center;
+    size-adjust: 600 px ;
+}
+
+html { background-color: #4a148c ;
+    width: 100%;
+    height: 100%;
+}
+
+form {
+    padding-top: 10%;
+    right: 40%;
+}
+
+div.input-field {
+width: 60px;
+
+}
+.btn {
+
+    background-color: aliceblue;
+}
+input.blue.darken-1.class {
+    position: relative; 
+    border-radius: 25px;
+  background-position: left top;
+  background-repeat: repeat;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+
 
 }
