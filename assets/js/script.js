@@ -109,6 +109,7 @@ $.get(
 
 
 
+
 var searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', function() {
   var searchBar = document.getElementById('searchBar');
@@ -132,3 +133,5 @@ searchButton.addEventListener('click', function() {
   });
   xhr.send();
 });
+
+
