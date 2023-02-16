@@ -103,13 +103,6 @@ $.get(
 // in order to support multi-word titles: create an array of user input, and use split() to find spaces, and replace any spaces in search with %
 
 
-
-
-
-
-
-
-
 var searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', function() {
   var searchBar = document.getElementById('searchBar');
@@ -133,5 +126,32 @@ searchButton.addEventListener('click', function() {
   });
   xhr.send();
 });
+
+
+// Variables for favorites page
+var favoriteMovies = ['Spider-Man','Iron Man','Ant-Man'];
+var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
+var favoritesListEl = $('#favorite-movies-list');
+var posterURL = '';
+
+
+for (var i = 0; i < favoriteMovies.length; i++){
+   fetch(movieURL+favoriteMovies[i])
+       .then(function (response) {
+           return response.json();
+       })
+       .then(function (data) {
+           var currentMovieTitle = favoritesListEl[i];
+           console.log(currentMovieTitle);
+           posterURL = data.Poster;
+       });
+}
+
+
+for (var i = 0; i < favoriteMovies.length; i++) {
+   var currentMovieTitle = favoriteMovies[i];
+   favoritesListEl.append('<div id="movie-'+[i].toString()+'" class="row"></div>');
+   // favoritesListEl.append('<div id="'+favoriteMovies[i].replace(/\s+/g, '')+'" class="row">'+currentMovieTitle+'</div>');
+}
 
 
