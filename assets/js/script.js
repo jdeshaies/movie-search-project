@@ -48,16 +48,15 @@
 
 
 // Variables for favorites page
-
-// var favoriteMovies = ['Spider-Man','Iron Man','Ant-Man'];
 var favoriteMoviesArray = [];
-
 var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
 var favoritesListEl = $('#favorite-movies-list');
 var posterURL = '';
 
+// Displays favorite movies list when page is first opened or refreshed
 renderFavoriteMovies();
 
+//Displays the list of favorite movies based on local storage and new movies added by users
 function renderFavoriteMovies() {
   favoritesListEl.empty();
   var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
@@ -67,7 +66,6 @@ function renderFavoriteMovies() {
   for (var i = 0; i < favoriteMoviesArray.length; i++) {
     var currentMovieTitle = favoriteMoviesArray[i].Title;
     var currentPosterURL = favoriteMoviesArray[i].moviePosterURL;
-    console.log(i+": "+currentMovieTitle+" "+currentPosterURL);
     favoritesListEl.append('<div class="row" data-index="'+i+'"></div>');
     $('*[data-index="'+i+'"]').append('<div class="col s2"><img src="'+currentPosterURL+'"></div>');
     $('*[data-index="'+i+'"]').append('<div class="col s8 center"><h4>'+currentMovieTitle+'</h4></div>');
@@ -75,48 +73,21 @@ function renderFavoriteMovies() {
   };
 }
 
-
+// Adds functionality to the remove button so it removes it from favorite movies array
 favoritesListEl.on("click", ".remove-favorite-btn", function () {
-  console.log($(this).parent().parent().attr("data-index"));
   var index = $(this).parent().parent().attr("data-index")
   favoriteMoviesArray.splice(index, 1);
   localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
   renderFavoriteMovies();
-})
-
-for (var i = 0; i < favoriteMoviesArray.length; i++){
-  var currentMovieTitle = favoriteMoviesArray[i].Title.replace(/\s+/g, '-').toLowerCase();
-  console.log(movieURL+currentMovieTitle)
-  console.log([i]);
-  fetch(movieURL+currentMovieTitle)
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-          // var currentMovieTitle = favoriteMoviesArray[i].Title;
-          // console.log(currentMovieTitle);
-          // posterURL = data.Poster;
-          console.log(data.Poster);
-//           // favoriteMoviesArray[i].moviePosterURL = posterURL;
-//           console.log(favoriteMoviesArray.length);
-//           console.log([i]);
-//           console.log(favoriteMoviesArray[i]);
-//           // console.log('Array: ' +favoriteMoviesArray[i]);
-//           // favoriteMoviesArray[i].moviePosterURL = data.Poster;
-//           // $('#movie-'+[i].toString()).prepend('<div class="col s4"><img src='+posterURL+'></div>');
-      });
-}
-
-// for (var i =0; i<favoriteMoviesArray.length; i++) {
-//   console.log(favoriteMoviesArray[i]);
-// }
+});
 
 
-// Test Prompt to get movie input and add it to favories array
+// Test Prompt to get movie input and add it to favories array and local storage
 var movieEntered = prompt('Enter movie');
 addFavoriteMovie(movieEntered);
 
+
+// Adds movie Title based on user input and movie poster URL as a new object in the favorite movie array
 function addFavoriteMovie(movieName){
   var newMovie = {
     Title: movieName,
