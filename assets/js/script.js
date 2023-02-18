@@ -1,40 +1,14 @@
 
-
-
-function getVideoId() {
-  var userInput = $("#searchBar").val();
-  console.log(userInput)
-  var userInputQuerySearch = userInput.replaceAll(" ", "+");
-  var requestUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBZWqlEr2JTKjchBOxdTr5oH14E9telw2k&type=video&q=${userInputQuerySearch}+official+trailer`;
- 
-  $.get(requestUrl, function (data) {
-    var videoId = data.items[0].id.videoId
-    var video = $("#youtubeVideo");
-    var videoLink = video.attr("src", `https://www.youtube.com/embed/${videoId}`);
-    console.log(videoId)
-    $("#video").append(video);
-  // return data.items[0].id.videoId;
-  });
-}
-
-// function playVideo(videoId) {
-//   var video = $("#youtubeVideo");
-//   console.log(videoId)
-//   video.attr("src", `https://www.youtube.com/embed/${videoId}`);
-//   $("#video").append(video);
-// }
-//${data.items[0.id]}
-//items[0].id.videoId
-
-
 var searchButton = document.getElementById("searchButton");
 
 
 searchButton.addEventListener("click", function () {
-  //need to link to results.html
-  // console.log(userInput)
+  
+ // we'll have to move the OMDB data retrieval function (all the commented out code) to inside the new result.js
   var searchBar = document.getElementById("searchBar");
   var searchTerm = searchBar.value;
+  localStorage.setItem("searchInput", searchTerm)
+  window.location.href="./result.html"
   // var url = "http://www.omdbapi.com/?t=" + searchTerm + "&apikey=16ec6f98";
   // var xhr = new XMLHttpRequest();
   // xhr.open("GET", url);
@@ -54,8 +28,7 @@ searchButton.addEventListener("click", function () {
     // }
   // });
   // xhr.send();
-  getVideoId();
-  // playVideo(videoId);
+
 });
 
 
