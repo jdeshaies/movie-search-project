@@ -1,49 +1,61 @@
-var requestUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBZWqlEr2JTKjchBOxdTr5oH14E9telw2k&type=video&q=${userInputQuerySearch}`;
-var userInput = $("#").val();
-var userInputQuerySearch = userInput.replaceAll(" ", "+");
 
 
-function getApi() {
+
+function getVideoId() {
+  var userInput = $("#searchBar").val();
+  console.log(userInput)
+  var userInputQuerySearch = userInput.replaceAll(" ", "+");
+  var requestUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBZWqlEr2JTKjchBOxdTr5oH14E9telw2k&type=video&q=${userInputQuerySearch}+official+trailer`;
+ 
   $.get(requestUrl, function (data) {
-    var videoId = data.items[0].id.videoId;
-    console.log(data);
-    console.log(data.items[0].id.videoId);
+    var videoId = data.items[0].id.videoId
+    var video = $("#youtubeVideo");
+    var videoLink = video.attr("src", `https://www.youtube.com/embed/${videoId}`);
+    console.log(videoId)
+    $("#video").append(video);
+  // return data.items[0].id.videoId;
   });
 }
 
-function playVideo(videoId) {
-  var video = $("#youtubeVideo");
-  video.attr("src", "https://www.youtube.com/embed/zyYgDtY2AMY");
-
-  $("#video").append(video);
-}
+// function playVideo(videoId) {
+//   var video = $("#youtubeVideo");
+//   console.log(videoId)
+//   video.attr("src", `https://www.youtube.com/embed/${videoId}`);
+//   $("#video").append(video);
+// }
 //${data.items[0.id]}
 //items[0].id.videoId
 
 
 var searchButton = document.getElementById("searchButton");
+
+
 searchButton.addEventListener("click", function () {
+  //need to link to results.html
+  // console.log(userInput)
   var searchBar = document.getElementById("searchBar");
   var searchTerm = searchBar.value;
-  var url = "http://www.omdbapi.com/?t=" + searchTerm + "&apikey=16ec6f98";
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url);
-  xhr.addEventListener("load", function () {
-    var response = JSON.parse(xhr.response);
-    var results = response.Search;
-    var resultsContainer = document.createElement("div");
-    resultsContainer.setAttribute("id", "resultsContainer");
-    document.body.appendChild(resultsContainer);
-    for (var i = 0; i < results.length; i++) {
-      var result = results[i];
-      var resultContainer = document.createElement("div");
-      resultContainer.setAttribute("class", "resultContainer");
-      resultContainer.innerHTML = result.Title;
-      resultsContainer.appendChild(resultContainer);
-      playVideo();
-    }
-  });
-  xhr.send();
+  // var url = "http://www.omdbapi.com/?t=" + searchTerm + "&apikey=16ec6f98";
+  // var xhr = new XMLHttpRequest();
+  // xhr.open("GET", url);
+  // xhr.addEventListener("load", function () {
+  //   var response = JSON.parse(xhr.response);
+  //   var results = response.Search;
+  //   var resultsContainer = document.createElement("div");
+  //   resultsContainer.setAttribute("id", "resultsContainer");
+  //   document.body.appendChild(resultsContainer);
+  //   for (var i = 0; i < results.length; i++) {
+  //     var result = results[i];
+  //     var resultContainer = document.createElement("div");
+  //     resultContainer.setAttribute("class", "resultContainer");
+  //     resultContainer.innerHTML = result.Title;
+  //     resultsContainer.appendChild(resultContainer);
+    
+    // }
+  // });
+  // xhr.send();
+  getVideoId();
+  // playVideo(videoId);
 });
 
 
