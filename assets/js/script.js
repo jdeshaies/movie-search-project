@@ -50,28 +50,20 @@
 // Variables for favorites page
 
 // var favoriteMovies = ['Spider-Man','Iron Man','Ant-Man'];
-var favoriteMoviesArray = [
-  {
-    Title: "Spider-Man",
-    moviePosterURL: "https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_SX300.jpg",
-  },
-  {
-    Title: "Iron Man",
-    moviePosterURL: "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg",
-  },
-  {
-    Title: "Ant-Man",
-    moviePosterURL: "https://m.media-amazon.com/images/M/MV5BMjM2NTQ5Mzc2M15BMl5BanBnXkFtZTgwNTcxMDI2NTE@._V1_SX300.jpg",
-  }
-];
-
+var favoriteMoviesArray = [];
 
 var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
 var favoritesListEl = $('#favorite-movies-list');
 var posterURL = '';
 
+renderFavoriteMovies();
+
 function renderFavoriteMovies() {
-  favoritesListEl.empty()
+  favoritesListEl.empty();
+  var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
+  if (favoriteMoviesStorage !== null) {
+    favoriteMoviesArray = favoriteMoviesStorage;
+  }
   for (var i = 0; i < favoriteMoviesArray.length; i++) {
     var currentMovieTitle = favoriteMoviesArray[i].Title;
     var currentPosterURL = favoriteMoviesArray[i].moviePosterURL;
@@ -83,12 +75,12 @@ function renderFavoriteMovies() {
   };
 }
 
-// renderFavoriteMovies()
 
 favoritesListEl.on("click", ".remove-favorite-btn", function () {
   console.log($(this).parent().parent().attr("data-index"));
   var index = $(this).parent().parent().attr("data-index")
   favoriteMoviesArray.splice(index, 1);
+  localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
   renderFavoriteMovies();
 })
 
@@ -138,7 +130,7 @@ function addFavoriteMovie(movieName){
       .then(function (data) {
         newMovie.moviePosterURL = data.Poster;
         favoriteMoviesArray.push(newMovie);
-        console.log(favoriteMoviesArray);
+        localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
         renderFavoriteMovies();
       })
 }
