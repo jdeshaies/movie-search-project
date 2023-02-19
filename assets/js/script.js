@@ -7,6 +7,9 @@ searchButton.addEventListener("click", function () {
  // we'll have to move the OMDB data retrieval function (all the commented out code) to inside the new result.js
   var searchBar = document.getElementById("searchBar");
   var searchTerm = searchBar.value;
+  if (searchTerm === "" || searchTerm === " "){
+    alert("Please enter a movie title")
+  } else {
   localStorage.setItem("searchInput", searchTerm)
   window.location.href="./result.html"
   // var url = "http://www.omdbapi.com/?t=" + searchTerm + "&apikey=16ec6f98";
@@ -28,7 +31,7 @@ searchButton.addEventListener("click", function () {
     // }
   // });
   // xhr.send();
-
+  }
 });
 
 

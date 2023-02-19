@@ -12,7 +12,7 @@ function playVideo() {
       var videoLink = video.attr("src", `https://www.youtube.com/embed/${videoId}`);
       console.log(videoId)
       $("#video").append(video);
-    // return data.items[0].id.videoId;
+        
     });
   }
   playVideo();
