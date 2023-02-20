@@ -1,6 +1,12 @@
 
 var searchButton = document.getElementById("searchButton");
 
+function popup(){
+  $("#validation").css("visibility", "visible")
+  $("#closeValidationBtn").click(function(){
+    $("#validation").css("visibility", "hidden")
+  })
+}
 
 searchButton.addEventListener("click", function () {
   
@@ -8,7 +14,7 @@ searchButton.addEventListener("click", function () {
   var searchBar = document.getElementById("searchBar");
   var searchTerm = searchBar.value;
   if (searchTerm === "" || searchTerm === " "){
-    alert("Please enter a movie title")
+    popup()
   } else {
   localStorage.setItem("searchInput", searchTerm)
   window.location.href="./result.html"
