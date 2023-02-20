@@ -17,3 +17,8 @@ function playVideo() {
   });
 }
 playVideo();
+
+var homeBtn = $("#searchAgain");
+homeBtn.click(function () {
+  window.location.href = "./index.html";
+});
