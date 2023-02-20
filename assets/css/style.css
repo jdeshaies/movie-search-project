@@ -51,3 +51,22 @@ body button{
 
 
 }
+
+#video{
+    margin-top: 25px;
+}
+
+#searchAgainBtn{
+    margin-left: 20px;
+}
+#validation{
+    background-color: #fff;
+    border: lightblue solid 3px;
+    border-radius: 5px;
+    width: 30vw;
+    height: 18vh;
+    position: absolute;
+    text-align: center;
+    top: 295px;
+    visibility:hidden;
+}
