@@ -2,6 +2,9 @@
 var userInput = localStorage.getItem("searchInput");
 //runs the playVideo function which takes users input and displays movie trailer
 function playVideo(movieTitle) {
+  // ensures the trailer is visible, and the movie title modal is hidden
+  $("#video").css("visibility", "visible");
+  $("#OMDBValidation").css("visibility", "hidden");
   //replaces all spaces in the search term with "+" so that the API can use the term in its URL
   var userInputQuerySearch = movieTitle.replaceAll(" ", "+");
 
@@ -16,10 +19,27 @@ function playVideo(movieTitle) {
     $("#video").append(video);
   });
 }
-//return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
 playVideo(userInput);
 
 var homeBtn = $("#searchAgain");
 homeBtn.click(function () {
   window.location.href = "./index.html";
 });
+
+//checks the OMDB response to see if a movie title is returned
+$.get(
+  `http://www.omdbapi.com/?t=${userInput}&apikey=16ec6f98`,
+  function (data) {
+    console.log(data.Response);
+    console.log(data);
+    //if no movie title is found, then a pop up modal will appear prompting the user to search again
+    if (data.Response === "False") {
+      console.log("No movie with that title. Please try again");
+      $("#video").css("visibility", "hidden");
+      $("#OMDBValidation").css("visibility", "visible");
+      $("#closeOMDBValidationBtn").click(function () {
+        window.location.href = "./index.html";
+      });
+    }
+  }
+);
