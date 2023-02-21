@@ -110,7 +110,7 @@ function renderFavoriteMovies() {
     var currentMovieTitle = favoriteMoviesArray[i].Title;
     var currentPosterURL = favoriteMoviesArray[i].moviePosterURL;
     favoritesListEl.append('<div class="row white section" data-index="'+i+'"></div>');
-    $('*[data-index="'+i+'"]').append('<div class="col s4"><img src="'+currentPosterURL+'"></div>');
+    $('*[data-index="'+i+'"]').append('<div class="col s4"><img class="responsive-img" src="'+currentPosterURL+'"></div>');
     $('*[data-index="'+i+'"]').append('<div class="col s4 center"><h4>'+currentMovieTitle+'</h4></div>');
     $('*[data-index="'+i+'"]').append('<div class="col s4 right"><a class="remove-favorite-btn waves-effect waves-light btn red right"><i class="material-icons left">delete</i>Remove</a></div>');
   };
