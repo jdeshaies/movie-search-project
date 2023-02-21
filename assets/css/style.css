@@ -33,6 +33,11 @@ quote {
 main {
     padding-left: 40%;
 }
+
+#favorites-content{
+    padding: 2%;
+}
+
 input.blue.darken-1.class { 
     border-radius: 25px;
   background-position: left top;
