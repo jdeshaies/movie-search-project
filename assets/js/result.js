@@ -48,8 +48,6 @@ function playVideo(movieTitle) {
     
 ;
 
-
-
 //return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
 playVideo(userInput);
 
@@ -57,8 +55,6 @@ var homeBtn = $("#searchAgain");
 homeBtn.click(function () {
   window.location.href = "./index.html";
 });
-
-
 
 // Variables for favorites page
 var favoriteMoviesArray = [];
@@ -86,26 +82,3 @@ addButton.addEventListener('click', function() {
         localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
       })
 });
-
-// Adds movie Title based on user input and movie poster URL as a new object in the favorite movie array
-// function addFavoriteMovie(movieName){
-//   var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
-//   if (favoriteMoviesStorage !== null) {
-//     favoriteMoviesArray = favoriteMoviesStorage;
-//   }
-//   var newMovie = {
-//     Title: localStorage.getItem("movieTitle"),
-//     moviePosterURL: ""
-//   }
-//   movieName.replace(/\s+/g, '-').toLowerCase();
-//   fetch(movieURL+movieName)
-//       .then(function (response) {
-//           return response.json();
-//       })
-//       .then(function (data) {
-//         newMovie.moviePosterURL = data.Poster;
-//         favoriteMoviesArray.push(newMovie);
-//         localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
-//         renderFavoriteMovies();
-//       })
-// }
