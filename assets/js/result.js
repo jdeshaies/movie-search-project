@@ -11,7 +11,7 @@ function playVideo(OMDBMovieTitle) {
   var userInputQuerySearch = OMDBMovieTitle.replaceAll(" ", "+");
 
   //takes the now mutated userInput and adds "official+trailer" to the end in order to grab a movie trailer
-  var requestUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBZWqlEr2JTKjchBOxdTr5oH14E9telw2k&type=video&q=${userInputQuerySearch}+official+trailer`;
+  var requestUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyA0JBqAiOtfW2kn7yO3lIJxLIMt51F-XKM&type=video&q=${userInputQuerySearch}+official+trailer`;
 
   //using jquery to get the data needed from the API's response, and appending it to the iframe player to display on the page
   $.get(requestUrl, function (data) {
@@ -92,6 +92,7 @@ var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
 //Adds event listener to add button
 var addButton = document.getElementById('add-btn');
 addButton.addEventListener('click', function() {
+  console.log('Button Clicked');
   var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
   if (favoriteMoviesStorage !== null) {
     favoriteMoviesArray = favoriteMoviesStorage;
