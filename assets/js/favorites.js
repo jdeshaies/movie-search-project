@@ -1,6 +1,6 @@
 // Variables for favorites page
 var favoriteMoviesArray = [];
-var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
+var movieURL = 'https://www.omdbapi.com/?apikey=16ec6f98&t=';
 var favoritesListEl = $('#favorite-movies-list');
 var posterURL = '';
 

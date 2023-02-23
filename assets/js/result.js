@@ -5,7 +5,7 @@ var userInputel = document.getElementById('input-test');
     
     
     //var userInputel = document.getElementById('userInput').value;
-    var url = 'http://www.omdbapi.com/?apikey=16ec6f98&t='+userInput;
+    var url = 'https://www.omdbapi.com/?apikey=16ec6f98&t='+userInput;
     
     fetch(url)
       .then(function(response) {
@@ -72,7 +72,7 @@ homeBtn.click(function () {
 
 //checks the OMDB response to see if a movie title is returned
 function movieTitleValidation(userInput) {$.get(
-  `http://www.omdbapi.com/?t=${userInput}&apikey=16ec6f98`,
+  `https://www.omdbapi.com/?t=${userInput}&apikey=16ec6f98`,
   function (data) {
     console.log(data.Response);
     console.log(data);
@@ -90,7 +90,7 @@ function movieTitleValidation(userInput) {$.get(
 
 // Variables for favorites page
 var favoriteMoviesArray = [];
-var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
+var movieURL = 'https://www.omdbapi.com/?apikey=16ec6f98&t=';
 
 //Adds event listener to add button
 var addButton = document.getElementById('add-btn');
