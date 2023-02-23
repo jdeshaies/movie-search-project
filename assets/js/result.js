@@ -95,6 +95,7 @@ var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
 //Adds event listener to add button
 var addButton = document.getElementById('add-btn');
 addButton.addEventListener('click', function() {
+  console.log('Button Clicked');
   var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
   if (favoriteMoviesStorage !== null) {
     favoriteMoviesArray = favoriteMoviesStorage;
