@@ -21,13 +21,51 @@ function playVideo(OMDBMovieTitle) {
     $("#video").append(video);
   });
 }
+
 //pass OMDBMovieTitle to make sure youtube searches the same movie the OMDB response comes back with
 playVideo(OMDBMovieTitle);
+
+
+    var userInputel = document.getElementById('input-test');
+    console.log(userInputel)
+    //userInputel.setAttribute('type', 'text');
+    //userInputel.setAttribute('id', 'userInput');
+    //document.body.appendChild(userInputel);
+    
+    //var userInputel = document.getElementById('userInput').value;
+    var url = 'http://www.omdbapi.com/?apikey=16ec6f98&t='+userInput;
+    
+    fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        console.log(JSON.stringify(data));
+        var title = document.createElement('div');
+        localStorage.setItem("movieTitle", data.Title);
+        title.innerHTML = 'Title: ' + data.Title;
+        userInputel.appendChild(title);
+        
+        var year = document.createElement('div');
+        year.innerHTML = 'Year: ' + data.Year;
+        userInputel.appendChild(year);
+        
+        var rating = document.createElement('div');
+        rating.innerHTML = 'Rating: ' + data.Rated;
+        userInputel.appendChild(rating);
+      });
+    
+;
+
+//return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
+playVideo(userInput);
+
 
 var homeBtn = $("#searchAgain");
 homeBtn.click(function () {
   window.location.href = "./index.html";
 });
+
 
 //checks the OMDB response to see if a movie title is returned
 $.get(
@@ -46,3 +84,31 @@ $.get(
     }
   }
 );
+
+// Variables for favorites page
+var favoriteMoviesArray = [];
+var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
+
+//Adds event listener to add button
+var addButton = document.getElementById('add-btn');
+addButton.addEventListener('click', function() {
+  var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
+  if (favoriteMoviesStorage !== null) {
+    favoriteMoviesArray = favoriteMoviesStorage;
+  }
+  var newMovie = {
+    Title: localStorage.getItem("movieTitle"),
+    moviePosterURL: ""
+  }
+  var movieName = newMovie.Title.replace(/\s+/g, '-').toLowerCase();
+  fetch(movieURL+movieName)
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+        newMovie.moviePosterURL = data.Poster;
+        favoriteMoviesArray.push(newMovie);
+        localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
+      })
+});
+
