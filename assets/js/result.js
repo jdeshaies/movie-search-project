@@ -1,5 +1,6 @@
 //grabbing the search term from local storage
 var userInput = localStorage.getItem("searchInput");
+//var OMDBMovieTitle = 
 //runs the playVideo function which takes users input and displays movie trailer
 function playVideo(movieTitle) {
   // ensures the trailer is visible, and the movie title modal is hidden
@@ -19,6 +20,7 @@ function playVideo(movieTitle) {
     $("#video").append(video);
   });
 }
+//pass OMDBMovieTitle to make sure youtube searches the same movie the OMDB response comes back with
 playVideo(userInput);
 
 var homeBtn = $("#searchAgain");

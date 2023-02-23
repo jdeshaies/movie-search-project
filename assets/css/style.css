@@ -77,10 +77,10 @@ body button{
     border-radius: 5px;
     padding-top: 4vh;
     width: 35vw;
-    height: 18vh;
+    height: 22vh;
     position: absolute;
     text-align: center;
-    top: 255px;
+    top: 235px;
     visibility:hidden;
 }
 
