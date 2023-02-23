@@ -16,6 +16,39 @@ function playVideo(movieTitle) {
     $("#video").append(video);
   });
 }
+
+    var userInputel = document.getElementById('input-test');
+    console.log(userInputel)
+    //userInputel.setAttribute('type', 'text');
+    //userInputel.setAttribute('id', 'userInput');
+    //document.body.appendChild(userInputel);
+    
+    //var userInputel = document.getElementById('userInput').value;
+    var url = 'http://www.omdbapi.com/?apikey=16ec6f98&t='+userInput;
+    
+    fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        console.log(JSON.stringify(data));
+        var title = document.createElement('div');
+        title.innerHTML = 'Title: ' + data.Title;
+        userInputel.appendChild(title);
+        
+        var year = document.createElement('div');
+        year.innerHTML = 'Year: ' + data.Year;
+        userInputel.appendChild(year);
+        
+        var rating = document.createElement('div');
+        rating.innerHTML = 'Rating: ' + data.Rated;
+        userInputel.appendChild(rating);
+      });
+    
+;
+
+
+
 //return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
 playVideo(userInput);
 
