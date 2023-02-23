@@ -22,20 +22,9 @@ searchButton.addEventListener("click", function () {
   localStorage.setItem("searchInput", searchTerm)
   //after the search button is clicked, it changes the window to the result.html file to display the results
   window.location.href="./result.html"
-
-
-// Variables for favorites page
-var favoriteMoviesArray = [];
-var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
-var favoritesListEl = $('#favorite-movies-list');
-var posterURL = '';
-
-// Displays favorite movies list when page is first opened or refreshed
-renderFavoriteMovies();
-
-
-  }
+}
 });
+
 
 // Brings user to favorites page when button clicked on homepage
 var favoritesPageBtn = $("#favorites-btn");
