@@ -46,49 +46,30 @@
 //   xhr.send();
 // });
 
-// var searchButton = document.getElementById("searchButton");
-// //shows and hides the pop up modal box to use a validation for the search box
-// function popup(){
-//   $("#validation").css("visibility", "visible")
-//   $("#closeValidationBtn").click(function(){
-//     $("#validation").css("visibility", "hidden")
-//   })
-// }
-// //click event on the search button
-// searchButton.addEventListener("click", function () {
+var searchButton = document.getElementById("searchButton");
+//shows and hides the pop up modal box to use a validation for the search box
+function popup(){
+$("#validation").css("visibility", "visible")
+$("#closeValidationBtn").click(function(){
+$("#validation").css("visibility", "hidden")
+})
+}
+//click event on the search button
+searchButton.addEventListener("click", function () {
   
-//  // we'll have to move the OMDB data retrieval function (all the commented out code) to inside the new result.js
-//   var searchBar = document.getElementById("searchBar");
-//   var searchTerm = searchBar.value;
-//   //validation for the search box. Will run the popup function if those conditions are met
-//   if (searchTerm === "" || searchTerm === " "){
-//     popup()
-//   } else {
-//     //added the search term to local storage so it can be accessed on the result.js file in order to run the playVideo function
-//   localStorage.setItem("searchInput", searchTerm)
-//   //after the search button is clicked, it changes the window to the result.html file to display the results
-//   window.location.href="./result.html"
-//   var url = "http://www.omdbapi.com/?t=" + searchTerm + "&apikey=16ec6f98";
-//   var xhr = new XMLHttpRequest();
-//   xhr.open("GET", url);
-//   xhr.addEventListener("load", function () {
-//     var response = JSON.parse(xhr.response);
-//     var results = response.Search;
-//     var resultsContainer = document.createElement("div");
-//     resultsContainer.setAttribute("id", "resultsContainer");
-//     document.body.appendChild(resultsContainer);
-//     for (var i = 0; i < results.length; i++) {
-//       var result = results[i];
-//       var resultContainer = document.createElement("div");
-//       resultContainer.setAttribute("class", "resultContainer");
-//       resultContainer.innerHTML = result.Title;
-//       resultsContainer.appendChild(resultContainer);
-    
-//     }
-//   });
-//   xhr.send();
-//   }
-// });
+  var searchBar = document.getElementById("searchBar");
+  var searchTerm = searchBar.value;
+  //validation for the search box. Will run the popup function if those conditions are met
+  if (searchTerm === "" || searchTerm === " "){
+    popup()
+  } else {
+    //added the search term to local storage so it can be accessed on the result.js file in order to run the playVideo function
+  localStorage.setItem("searchInput", searchTerm)
+  //after the search button is clicked, it changes the window to the result.html file to display the results
+  window.location.href="./result.html"
+
+  }
+});
 
 // Variables for favorites page
 var favoriteMoviesArray = [];
