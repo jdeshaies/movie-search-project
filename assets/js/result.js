@@ -33,6 +33,7 @@ function playVideo(movieTitle) {
       .then(function(data) {
         console.log(JSON.stringify(data));
         var title = document.createElement('div');
+        localStorage.setItem("movieTitle", data.Title);
         title.innerHTML = 'Title: ' + data.Title;
         userInputel.appendChild(title);
         
@@ -47,12 +48,37 @@ function playVideo(movieTitle) {
     
 ;
 
-
-
 //return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
 playVideo(userInput);
 
 var homeBtn = $("#searchAgain");
 homeBtn.click(function () {
   window.location.href = "./index.html";
+});
+
+// Variables for favorites page
+var favoriteMoviesArray = [];
+var movieURL = 'http://www.omdbapi.com/?apikey=16ec6f98&t=';
+
+//Adds event listener to add button
+var addButton = document.getElementById('add-btn');
+addButton.addEventListener('click', function() {
+  var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
+  if (favoriteMoviesStorage !== null) {
+    favoriteMoviesArray = favoriteMoviesStorage;
+  }
+  var newMovie = {
+    Title: localStorage.getItem("movieTitle"),
+    moviePosterURL: ""
+  }
+  var movieName = newMovie.Title.replace(/\s+/g, '-').toLowerCase();
+  fetch(movieURL+movieName)
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+        newMovie.moviePosterURL = data.Poster;
+        favoriteMoviesArray.push(newMovie);
+        localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
+      })
 });
