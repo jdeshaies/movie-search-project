@@ -1,9 +1,14 @@
 //grabbing the search term from local storage
 var userInput = localStorage.getItem("searchInput");
+var OMDBMovieTitle = localStorage.getItem("movieTitle")
+//var OMDBMovieTitle = 
 //runs the playVideo function which takes users input and displays movie trailer
-function playVideo(movieTitle) {
+function playVideo(OMDBMovieTitle) {
+  // ensures the trailer is visible, and the movie title modal is hidden
+  $("#video").css("visibility", "visible");
+  $("#OMDBValidation").css("visibility", "hidden");
   //replaces all spaces in the search term with "+" so that the API can use the term in its URL
-  var userInputQuerySearch = movieTitle.replaceAll(" ", "+");
+  var userInputQuerySearch = OMDBMovieTitle.replaceAll(" ", "+");
 
   //takes the now mutated userInput and adds "official+trailer" to the end in order to grab a movie trailer
   var requestUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBZWqlEr2JTKjchBOxdTr5oH14E9telw2k&type=video&q=${userInputQuerySearch}+official+trailer`;
@@ -16,6 +21,10 @@ function playVideo(movieTitle) {
     $("#video").append(video);
   });
 }
+
+//pass OMDBMovieTitle to make sure youtube searches the same movie the OMDB response comes back with
+playVideo(OMDBMovieTitle);
+
 
     var userInputel = document.getElementById('input-test');
     console.log(userInputel)
@@ -51,10 +60,30 @@ function playVideo(movieTitle) {
 //return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
 playVideo(userInput);
 
+
 var homeBtn = $("#searchAgain");
 homeBtn.click(function () {
   window.location.href = "./index.html";
 });
+
+
+//checks the OMDB response to see if a movie title is returned
+$.get(
+  `http://www.omdbapi.com/?t=${userInput}&apikey=16ec6f98`,
+  function (data) {
+    console.log(data.Response);
+    console.log(data);
+    //if no movie title is found, then a pop up modal will appear prompting the user to search again
+    if (data.Response === "False") {
+      console.log("No movie with that title. Please try again");
+      $("#video").css("visibility", "hidden");
+      $("#OMDBValidation").css("visibility", "visible");
+      $("#closeOMDBValidationBtn").click(function () {
+        window.location.href = "./index.html";
+      });
+    }
+  }
+);
 
 // Variables for favorites page
 var favoriteMoviesArray = [];
@@ -82,3 +111,4 @@ addButton.addEventListener('click', function() {
         localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
       })
 });
+

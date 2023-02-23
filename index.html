@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -8,62 +9,50 @@
   <link rel="Stylesheet" href="assets/css/materialize.css">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Ripe Tomatoes</title>
 </head>
 
-<div class="background-color #4a148c purple darken-4">
+<body class="background-color #4a148c purple darken-4">
 
-  <banner>
-    <h1>
-      <div class="text-align center">
-        <span class="material-symbols-outlined ">
-          theater_comedy
-        </span>
-    </h1>
-  </banner>
-  <body>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">Ripe Tomatoes</a>
+      <i id="theater" class="medium right material-symbols-outlined"> theater_comedy</i>
+      <ul id="nav-mobile" class="left">
+        <a id="favBtn" class="btn z-depth-3" href="./favorites.html">Favorites</a>
+      </ul>
+    </div>
+  </nav>
+
   <quote>
-    <b Ripe tomatoes here, savory for spaghetti, not suitable for dodgeball! ></b>
-
-    Ripe Tomatoes is where you will find what everyone will enjoy at the theatre. 
-    - watch trailers 
+    Ripe Tomatoes is where you will find what everyone will enjoy at the theatre.
+    -watch trailers
     -read reviews
     AND add to your favorites, to save for later
   </quote>
+
+  <main>
+    <h1 class="size 500px"></h1>
+    <div class="input-field">
+      <div class="round edge">
+        <input style="width:25vw" class="blue darken-1 class validate" type="text" id="searchBar" required>
+        <label class="label-icon" for="search"><i class="material-icons"></i></label>
+        <i class="material-icons"> Search</i>
+        <button class="btn" id="searchButton" btn-medium">Search</button>
+      </div>
+    </div>
+
+    <div id="validation">
+      <h5>
+        Please enter a movie title
+      </h5>
+      <button style="width:10vw" id="closeValidationBtn" class="btn"> OK</button>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+  </main>
 </body>
 
-
-<menu>
-    <div class="left">
-      <button class="btn btn-medium" id="favorites-btn">Favorites</button>
-      <!-- Grey navigation panel -->
-    </div>
-    </div>
-  </menu>
-  <main>
-    <h1 class="size 500px" ></h1>
-      <div class="input-field">
-        <div class="round edge">
-          <input style="width:25vw" class="blue darken-1 class validate" type="text" id="searchBar" required>
-          <label class="label-icon" for="search"><i class="material-icons"></i></label>
-          <i class="material-icons"> Search</i>  
-          <button class="btn" id="searchButton" btn-medium">Search</button>
-        </div>
-      </div>
-
-      <div id="validation">
-        <h5>
-          Please enter a movie title
-        </h5>
-        <button style="width:10vw" id="closeValidationBtn" class="btn"> OK</button>
-      </div>
-
-      <script src="./assets/js/script.js"></script>
-  
-  </body>
-
-      </div>
-    </main>
 </html>
 
