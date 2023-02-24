@@ -2,6 +2,8 @@
 # Ripe Tomatoes
 
 ## Description
+We built Ripe Tomatoes to create an application that allows users to search for movies and be provided a trailer along with movie information.
+
 This application uses YouTube Data API, and OMDB API to allow the user to search for movie titles, and provides the user with movie information such as the year it was released and its rating, along with a movie trailer. It utilized the YouTube Data API, and the OMDB API. The YouTube Data API is used for grabbing and displaying the movie trailer, and the OMDB API is used for getting the movie information that is displayed on the page. The favorites page allows the user to add a chosen movie or movies to their favorites list, and easily remove them later on.
 
 ## Usage
@@ -22,5 +24,5 @@ example screenshots showing the layout is provided below:
 ![Ripe Tomatoes favorites](./assets/images/Favorite_Movies.png)
 
 ## Credits
-This projected was created by Brett Hicklin, Jacob Milojkovich, Joey Deshaies, and Shujaa Green, using YouTube Data API, and OMDB API.
+This projected was created by [Brett Hicklin](https://github.com/brett-hicklin), [Jacob Milojkovich](https://github.com/Jakemilo1), [Joey Deshaies](https://github.com/jdeshaies), and [Shujaa Green](https://github.com/Shujaagreen56), using YouTube Data API, and OMDB API.
 
