@@ -1,41 +1,48 @@
 //grabbing the search term from local storage
 var userInput = localStorage.getItem("searchInput");
-var userInputel = document.getElementById('input-test');
-    
-    
-    
-    //var userInputel = document.getElementById('userInput').value;
-    var url = 'https://www.omdbapi.com/?apikey=16ec6f98&t='+userInput;
-    
-    fetch(url)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        console.log(JSON.stringify(data));
-        var title = document.createElement('div');
-        localStorage.setItem("movieTitle", data.Title);
-        title.innerHTML = 'Title: ' + data.Title;
-        userInputel.appendChild(title);
-        
-        var year = document.createElement('div');
-        year.innerHTML = 'Year: ' + data.Year;
-        userInputel.appendChild(year);
-        
-        var rating = document.createElement('div');
-        rating.innerHTML = 'Rating: ' + data.Rated;
-        userInputel.appendChild(rating);
-        
-        
-var OMDBMovieTitle = localStorage.getItem("movieTitle")
-//return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
-movieTitleValidation(OMDBMovieTitle)
-playVideo(OMDBMovieTitle);
+var userInputel = document.getElementById("input-test");
 
+//var userInputel = document.getElementById('userInput').value;
+var url = "https://www.omdbapi.com/?apikey=16ec6f98&t=" + userInput;
+
+fetch(url)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(JSON.stringify(data));
+    var title = document.createElement("div");
+    //checks the OMDB response to see if a movie title is returned
+    if (data.Response === "False") {
+      localStorage.removeItem("searchInput");
+      localStorage.removeItem("movieTitle");
+      console.log("No movie with that title. Please try again");
+      $("#video").css("visibility", "hidden");
+      $("#OMDBValidation").css("visibility", "visible");
+      $("#closeOMDBValidationBtn").click(function () {
+        window.location.href = "./index.html";
       });
+    } else {
+      localStorage.setItem("movieTitle", data.Title);
+      title.innerHTML = "Title: " + data.Title;
+      userInputel.appendChild(title);
 
+      var year = document.createElement("div");
+      year.innerHTML = "Year: " + data.Year;
+      userInputel.appendChild(year);
 
+      var rating = document.createElement("div");
+      rating.innerHTML = "Rating: " + data.Rated;
+      userInputel.appendChild(rating);
 
+      var OMDBMovieTitle = localStorage.getItem("movieTitle");
+      console.log(OMDBMovieTitle);
+      console.log(data);
+      console.log(typeof OMDBMovieTitle);
+      //return Jake's movie title variable to be used as search term for youtube API, having him declare and call his function before playVideo is called
+      playVideo(OMDBMovieTitle);
+    }
+  });
 
 //runs the playVideo function which takes users input and displays movie trailer
 function playVideo(OMDBMovieTitle) {
@@ -57,62 +64,40 @@ function playVideo(OMDBMovieTitle) {
   });
 }
 
-
-
-    
-    
-
-
-
 var homeBtn = $("#searchAgain");
 homeBtn.click(function () {
   window.location.href = "./index.html";
 });
 
-
-//checks the OMDB response to see if a movie title is returned
-function movieTitleValidation(userInput) {$.get(
-  `https://www.omdbapi.com/?t=${userInput}&apikey=16ec6f98`,
-  function (data) {
-    console.log(data.Response);
-    console.log(data);
-    //if no movie title is found, then a pop up modal will appear prompting the user to search again
-    if (data.Response === "False") {
-      console.log("No movie with that title. Please try again");
-      $("#video").css("visibility", "hidden");
-      $("#OMDBValidation").css("visibility", "visible");
-      $("#closeOMDBValidationBtn").click(function () {
-        window.location.href = "./index.html";
-      });
-    }
-  }
-)};
-
 // Variables for favorites page
 var favoriteMoviesArray = [];
-var movieURL = 'https://www.omdbapi.com/?apikey=16ec6f98&t=';
+var movieURL = "https://www.omdbapi.com/?apikey=16ec6f98&t=";
 
 //Adds event listener to add button
-var addButton = document.getElementById('add-btn');
-addButton.addEventListener('click', function() {
-  console.log('Button Clicked');
-  var favoriteMoviesStorage = JSON.parse(localStorage.getItem("favoriteMoviesStorage"));
+var addButton = document.getElementById("add-btn");
+addButton.addEventListener("click", function () {
+  console.log("Button Clicked");
+  var favoriteMoviesStorage = JSON.parse(
+    localStorage.getItem("favoriteMoviesStorage")
+  );
   if (favoriteMoviesStorage !== null) {
     favoriteMoviesArray = favoriteMoviesStorage;
   }
   var newMovie = {
     Title: localStorage.getItem("movieTitle"),
-    moviePosterURL: ""
-  }
-  var movieName = newMovie.Title.replace(/\s+/g, '-').toLowerCase();
-  fetch(movieURL+movieName)
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (data) {
-        newMovie.moviePosterURL = data.Poster;
-        favoriteMoviesArray.push(newMovie);
-        localStorage.setItem("favoriteMoviesStorage", JSON.stringify(favoriteMoviesArray));
-      })
+    moviePosterURL: "",
+  };
+  var movieName = newMovie.Title.replace(/\s+/g, "-").toLowerCase();
+  fetch(movieURL + movieName)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      newMovie.moviePosterURL = data.Poster;
+      favoriteMoviesArray.push(newMovie);
+      localStorage.setItem(
+        "favoriteMoviesStorage",
+        JSON.stringify(favoriteMoviesArray)
+      );
+    });
 });
-
